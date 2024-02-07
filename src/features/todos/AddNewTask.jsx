@@ -1,15 +1,16 @@
 import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
+import CreateEditForm from "./CreateEditTask";
 
-export default function AddNewTask() {
+export default function AddNewTask({ onAddTask }) {
   return (
     <div>
       <Modal>
-        <Modal.Open>
+        <Modal.Open opens="addTask">
           <Button>Add New Task</Button>
         </Modal.Open>
-        <Modal.Window>
-          <h2>Window</h2>
+        <Modal.Window opens={"addTask"}>
+          <CreateEditForm onAddTask={onAddTask} />
         </Modal.Window>
       </Modal>
     </div>

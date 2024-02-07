@@ -61,7 +61,7 @@ function Window({ opens, children }) {
         <button className={styles.button} onClick={close}>
           &times;
         </button>
-        <div>{cloneElement(children, { onClose: () => close() })}</div>
+        <div>{cloneElement(children, { onCloseModal: () => close() })}</div>
       </div>
     </div>,
     document.body

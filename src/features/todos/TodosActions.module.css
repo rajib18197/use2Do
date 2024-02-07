@@ -1,0 +1,7 @@
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: end;
+  align-items: center;
+  background-color: rgb(219, 216, 216);
+}

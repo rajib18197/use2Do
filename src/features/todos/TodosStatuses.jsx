@@ -1,12 +1,12 @@
 import styles from "./TodosStatuses.module.css";
 import StatusBox from "./StatusBox";
 
-export default function TodosStatuses() {
+export default function TodosStatuses({ statuses }) {
   return (
     <div className={styles.statuses}>
-      <StatusBox />
-      <StatusBox />
-      <StatusBox />
+      {statuses.map((status) => (
+        <StatusBox key={status.value} status={status} />
+      ))}
     </div>
   );
 }

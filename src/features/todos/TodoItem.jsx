@@ -2,7 +2,9 @@ import TagsList from "./TagList";
 import styles from "./TodoItem.module.css";
 import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
 
-export default function TodoItem() {
+export default function TodoItem({ todo }) {
+  const { title, description, tags, priority } = todo;
+
   return (
     <div className={styles.todo}>
       <div className={styles.todoCompleted}>
@@ -12,15 +14,15 @@ export default function TodoItem() {
         {/* <ImCheckboxChecked /> */}
       </div>
 
-      <h2>Learn React JS</h2>
+      <h2>{title}</h2>
 
-      <div>{"description"}</div>
+      <div>{description}</div>
 
-      <TagsList tags={["web", "python", "api"]} />
+      <TagsList tags={tags} />
 
       <p>
         <span>color: </span>
-        Low
+        {priority}
       </p>
 
       <div>
