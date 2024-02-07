@@ -25,8 +25,8 @@ const filterOptions = [
 ];
 
 const sortOptions = [
-  { field: "name-asc", label: "Sort By Name (A - Z)" },
-  { field: "name-desc", label: "Sort By Name (Z - A)" },
+  { field: "title-asc", label: "Sort By Title (A - Z)" },
+  { field: "title-desc", label: "Sort By Title (Z - A)" },
   { field: "priority-asc", label: "Sort By Priority (A - Z)" },
   { field: "priority-desc", label: "Sort By Priority (Z - A)" },
 ];
@@ -35,7 +35,9 @@ export default function TodosLayout() {
   const [todos, dispatch] = useReducer(todosReducer, TASKS_LIST);
   const [status, setStatus] = useState("all");
   const [priority, setPriority] = useState("any");
+  const [sortBy, setSortBy] = useState("");
 
+  // 1) Filter
   let filteredTodos = todos;
   if (priority !== "any") {
     filteredTodos = filteredTodos.filter((todo) => todo.priority === priority);
@@ -49,12 +51,44 @@ export default function TodosLayout() {
 
   console.log(filteredTodos);
 
+  //   2) Sort
+
+  // 2) Sorting
+  let sortedTodos = filteredTodos;
+
+  if (sortBy) {
+    const [field, direction] = sortBy.split("-") || [];
+    const modifier = direction === "asc" ? 1 : -1;
+
+    sortedTodos = filteredTodos.slice().sort((a, b) => {
+      if (typeof a[field] === "string") {
+        // return a[field].localeCompare(b[field]) * modifier;
+        const first = a[field].toLowerCase();
+        const second = b[field].toLowerCase();
+
+        if (first < second) {
+          return -modifier;
+        } else if (first > second) {
+          return modifier;
+        } else {
+          return 0;
+        }
+      }
+
+      return (a[field] - b[field]) * modifier;
+    });
+  }
   function handleChange(value) {
     setPriority(value);
   }
 
   function handleStatusChange(value) {
     setStatus(value);
+  }
+
+  function handleSort(value) {
+    console.log(value);
+    setSortBy(value);
   }
 
   return (
@@ -78,10 +112,14 @@ export default function TodosLayout() {
           currentFilterValue={priority}
           onChangeFilter={handleChange}
         />
-        <SortBy options={sortOptions} />
+        <SortBy
+          options={sortOptions}
+          currentSortValue={sortBy}
+          onSort={handleSort}
+        />
       </TodosOperations>
 
-      <TodosList todos={filteredTodos} dispatch={dispatch} />
+      <TodosList todos={sortedTodos} dispatch={dispatch} />
     </div>
   );
 }
