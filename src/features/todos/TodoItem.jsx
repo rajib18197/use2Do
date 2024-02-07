@@ -5,16 +5,20 @@ import TagsList from "./TagList";
 import styles from "./TodoItem.module.css";
 import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
 
-export default function TodoItem({ todo, onEditTodo, onDeleteTodo }) {
-  const { title, description, tags, priority } = todo;
+export default function TodoItem({ todo, dispatch }) {
+  const { id: todoId, title, description, tags, priority, completed } = todo;
 
   return (
     <div className={styles.todo}>
       <div className={styles.todoCompleted}>
-        <button className={styles.button}>
-          <ImCheckboxUnchecked />
+        <button
+          className={styles.button}
+          onClick={() =>
+            dispatch({ type: "TOGGLE_COMPLETED", payload: todoId })
+          }
+        >
+          {completed ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
         </button>
-        {/* <ImCheckboxChecked /> */}
       </div>
 
       <h2>{title}</h2>
@@ -35,7 +39,7 @@ export default function TodoItem({ todo, onEditTodo, onDeleteTodo }) {
           </Modal.Open>
 
           <Modal.Window opens={"edit-task"}>
-            <CreateEditForm todoToEdit={todo} onEditTodo={onEditTodo} />
+            <CreateEditForm todoToEdit={todo} onEditTodo={dispatch} />
           </Modal.Window>
         </Modal>
 
@@ -46,7 +50,7 @@ export default function TodoItem({ todo, onEditTodo, onDeleteTodo }) {
           <Modal.Window opens={"delete-task"}>
             <ConfirmDelete
               onDelete={() =>
-                onDeleteTodo({ type: "DELETE_TASK", payload: todo.id })
+                dispatch({ type: "DELETE_TASK", payload: todo.id })
               }
             />
           </Modal.Window>

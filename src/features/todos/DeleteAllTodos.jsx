@@ -1,7 +1,8 @@
 import Button from "../../ui/Button";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 import Modal from "../../ui/Modal";
 
-export default function DeleteAllTodos() {
+export default function DeleteAllTodos({ onDeleteAllTodos }) {
   return (
     <div>
       <Modal>
@@ -9,7 +10,9 @@ export default function DeleteAllTodos() {
           <Button>Delete All Todos</Button>
         </Modal.Open>
         <Modal.Window>
-          <h2>Delete</h2>
+          <ConfirmDelete
+            onDelete={() => onDeleteAllTodos({ type: "DELETE_ALL_TASKS" })}
+          />
         </Modal.Window>
       </Modal>
     </div>

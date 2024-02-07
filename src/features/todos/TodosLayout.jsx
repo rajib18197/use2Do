@@ -14,7 +14,7 @@ import styles from "./TodosLayout.module.css";
 const statuses = [
   { value: "all", label: "All Todos" },
   { value: "completed", label: "Completed" },
-  { value: "InComplete", label: "InComplete" },
+  { value: "inComplete", label: "InComplete" },
 ];
 
 const filterOptions = [
@@ -41,20 +41,36 @@ export default function TodosLayout() {
     filteredTodos = filteredTodos.filter((todo) => todo.priority === priority);
   }
 
+  if (status === "all") filteredTodos = filteredTodos;
+  if (status === "completed")
+    filteredTodos = filteredTodos.filter((todo) => todo.completed);
+  if (status === "inComplete")
+    filteredTodos = filteredTodos.filter((todo) => !todo.completed);
+
+  console.log(filteredTodos);
+
   function handleChange(value) {
     setPriority(value);
+  }
+
+  function handleStatusChange(value) {
+    setStatus(value);
   }
 
   return (
     <div className={styles.layout}>
       <TodosActions>
         <AddNewTask onAddTask={dispatch} />
-        <DeleteAllTodos />
+        <DeleteAllTodos onDeleteAllTodos={dispatch} />
         {/* <button>Mark All Completed</button>
         <button>Delete Completed</button> */}
       </TodosActions>
 
-      <TodosStatuses statuses={statuses} />
+      <TodosStatuses
+        statuses={statuses}
+        currentStatus={status}
+        onStatusChange={handleStatusChange}
+      />
 
       <TodosOperations>
         <Filters
@@ -65,11 +81,7 @@ export default function TodosLayout() {
         <SortBy options={sortOptions} />
       </TodosOperations>
 
-      <TodosList
-        todos={filteredTodos}
-        onEditTodo={dispatch}
-        onDeleteTodo={dispatch}
-      />
+      <TodosList todos={filteredTodos} dispatch={dispatch} />
     </div>
   );
 }
