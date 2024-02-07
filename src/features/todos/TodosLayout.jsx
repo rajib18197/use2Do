@@ -58,7 +58,7 @@ export default function TodosLayout() {
         <SortBy options={sortOptions} />
       </TodosOperations>
 
-      <TodosList todos={todos} />
+      <TodosList todos={todos} onEditTodo={dispatch} />
     </div>
   );
 }

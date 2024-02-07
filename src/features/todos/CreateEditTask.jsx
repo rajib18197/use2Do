@@ -17,34 +17,35 @@ import Select from "../../ui/Select";
 
 export default function CreateEditForm({
   onAddTask,
-  taskToEdit,
+  todoToEdit,
+  onEditTodo,
   onCloseModal,
 }) {
-  const isEditSession = Boolean(taskToEdit?.id);
+  const isEditSession = Boolean(todoToEdit?.id);
 
   //   const tasksDispatch = useTasksDispatch();
 
   const [formState, dispatch] = useReducer(formReducer, {
     title: {
-      value: taskToEdit?.title || "",
+      value: todoToEdit?.title || "",
       error: "",
       isTouched: false,
     },
 
     description: {
-      value: taskToEdit?.description || "",
+      value: todoToEdit?.description || "",
       error: "",
       isTouched: false,
     },
 
     tags: {
-      value: taskToEdit?.tags || [],
+      value: todoToEdit?.tags || [],
       error: "",
       isTouched: false,
     },
 
     priority: {
-      value: taskToEdit?.priority || "",
+      value: todoToEdit?.priority || "",
       error: "",
       isTouched: false,
     },
@@ -131,7 +132,7 @@ export default function CreateEditForm({
     // 4) If everything is fine then create a new Task and dispatch either EDIT_TASK or ADD_NEW_TASK based on the mode
 
     const task = {
-      id: isEditSession ? taskToEdit.id : crypto.randomUUID(),
+      id: isEditSession ? todoToEdit.id : crypto.randomUUID(),
       title: formState.title.value,
       description: formState.description.value,
       tags: formState.tags.value.map((el) => el.trim()).filter(Boolean),
@@ -139,7 +140,7 @@ export default function CreateEditForm({
     };
 
     if (isEditSession) {
-      tasksDispatch({ type: "EDIT_TASK", payload: task });
+      onEditTodo({ type: "EDIT_TASK", payload: task });
       //   toast.success(`Task successfully edited!`);
     } else {
       onAddTask({ type: "ADD_NEW_TASK", payload: task });

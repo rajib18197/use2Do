@@ -1,8 +1,10 @@
+import Modal from "../../ui/Modal";
+import CreateEditForm from "./CreateEditTask";
 import TagsList from "./TagList";
 import styles from "./TodoItem.module.css";
 import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
 
-export default function TodoItem({ todo }) {
+export default function TodoItem({ todo, onEditTodo }) {
   const { title, description, tags, priority } = todo;
 
   return (
@@ -26,7 +28,16 @@ export default function TodoItem({ todo }) {
       </p>
 
       <div>
-        <button>Edit</button>
+        <Modal>
+          <Modal.Open opens={"edit-task"}>
+            <button>Edit</button>
+          </Modal.Open>
+
+          <Modal.Window opens={"edit-task"}>
+            <CreateEditForm todoToEdit={todo} onEditTodo={onEditTodo} />
+          </Modal.Window>
+        </Modal>
+
         <button>delete</button>
       </div>
     </div>
