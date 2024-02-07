@@ -18,6 +18,7 @@ const statuses = [
 ];
 
 const filterOptions = [
+  { label: "Any", value: "any", color: "red" },
   { label: "Low", value: "low", color: "red" },
   { label: "Medium", value: "medium", color: "red" },
   { label: "High", value: "high", color: "red" },
@@ -33,14 +34,16 @@ const sortOptions = [
 export default function TodosLayout() {
   const [todos, dispatch] = useReducer(todosReducer, TASKS_LIST);
   const [status, setStatus] = useState("all");
+  const [priority, setPriority] = useState("any");
 
-  //   let filteredTasksList = tasksList;
-  //   if (searchTerm.length > 0)
-  //     filteredTasksList = filteredTasksList.filter((task) =>
-  //       task.title.toLowerCase().includes(searchTerm.toLowerCase())
-  //     );
+  let filteredTodos = todos;
+  if (priority !== "any") {
+    filteredTodos = filteredTodos.filter((todo) => todo.priority === priority);
+  }
 
-  //   console.log(filteredTasksList);
+  function handleChange(value) {
+    setPriority(value);
+  }
 
   return (
     <div className={styles.layout}>
@@ -54,11 +57,19 @@ export default function TodosLayout() {
       <TodosStatuses statuses={statuses} />
 
       <TodosOperations>
-        <Filters options={filterOptions} />
+        <Filters
+          options={filterOptions}
+          currentFilterValue={priority}
+          onChangeFilter={handleChange}
+        />
         <SortBy options={sortOptions} />
       </TodosOperations>
 
-      <TodosList todos={todos} onEditTodo={dispatch} />
+      <TodosList
+        todos={filteredTodos}
+        onEditTodo={dispatch}
+        onDeleteTodo={dispatch}
+      />
     </div>
   );
 }

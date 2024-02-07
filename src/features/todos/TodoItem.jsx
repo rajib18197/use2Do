@@ -1,10 +1,11 @@
+import ConfirmDelete from "../../ui/ConfirmDelete";
 import Modal from "../../ui/Modal";
 import CreateEditForm from "./CreateEditTask";
 import TagsList from "./TagList";
 import styles from "./TodoItem.module.css";
 import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
 
-export default function TodoItem({ todo, onEditTodo }) {
+export default function TodoItem({ todo, onEditTodo, onDeleteTodo }) {
   const { title, description, tags, priority } = todo;
 
   return (
@@ -38,7 +39,18 @@ export default function TodoItem({ todo, onEditTodo }) {
           </Modal.Window>
         </Modal>
 
-        <button>delete</button>
+        <Modal>
+          <Modal.Open opens={"delete-task"}>
+            <button>delete</button>
+          </Modal.Open>
+          <Modal.Window opens={"delete-task"}>
+            <ConfirmDelete
+              onDelete={() =>
+                onDeleteTodo({ type: "DELETE_TASK", payload: todo.id })
+              }
+            />
+          </Modal.Window>
+        </Modal>
       </div>
     </div>
   );
