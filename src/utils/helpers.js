@@ -28,3 +28,27 @@ export function hasDuplicateValue(arr, value) {
 export function cloneArrWitoutLast(arr) {
   return arr.slice(0, arr.length - 1);
 }
+
+// Sort an Object
+
+export const sort = function (arr, field, modifier) {
+  const newSortedArr = arr.slice().sort((a, b) => {
+    if (typeof a[field] === "string") {
+      // return a[field].localeCompare(b[field]) * modifier;
+      const first = a[field].toLowerCase();
+      const second = b[field].toLowerCase();
+
+      if (first < second) {
+        return -modifier;
+      } else if (first > second) {
+        return modifier;
+      } else {
+        return 0;
+      }
+    }
+
+    return (a[field] - b[field]) * modifier;
+  });
+
+  return newSortedArr;
+};

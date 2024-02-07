@@ -9,7 +9,12 @@ export default function Tag({ bgColor, textColor, children }) {
 
   return (
     <li>
-      <span className={`${styles.tag}`}>{children}</span>
+      <span
+        className={`${styles.tag}`}
+        style={{ backgroundColor: `var(${tagBgColor})`, color: tagTextColor }}
+      >
+        {children}
+      </span>
     </li>
   );
 }

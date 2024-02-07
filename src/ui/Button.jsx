@@ -6,10 +6,13 @@ export default function Button({
   size,
   disabled,
   onClick,
+  active,
 }) {
   return (
     <button
-      className={`${styles.button} ${styles[variation]} ${styles[size]}`}
+      className={`${styles.button} ${styles[variation]} ${styles[size]} ${
+        active ? styles["active"] : ""
+      }`}
       onClick={onClick}
       disabled={disabled}
     >

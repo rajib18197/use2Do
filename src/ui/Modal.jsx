@@ -8,6 +8,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import styles from "./Modal.module.css";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 const ModalContext = createContext();
 
@@ -37,21 +38,7 @@ function Open({ opens, children }) {
 function Window({ opens, children }) {
   const { openName, close } = useContext(ModalContext);
 
-  const refEl = useRef();
-
-  useEffect(
-    function () {
-      function closeModal(e) {
-        if (refEl.current && !refEl.current.contains(e.target)) {
-          close();
-        }
-      }
-
-      document.addEventListener("click", closeModal, true);
-      return () => document.removeEventListener("click", closeModal, true);
-    },
-    [close]
-  );
+  const refEl = useOutsideClick(close);
 
   if (openName !== opens) return null;
 

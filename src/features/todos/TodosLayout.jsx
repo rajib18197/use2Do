@@ -11,6 +11,7 @@ import TodosActions from "./TodosActions";
 
 import styles from "./TodosLayout.module.css";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { sort } from "../../utils/helpers";
 
 const statuses = [
   { value: "all", label: "All Todos" },
@@ -40,6 +41,7 @@ export default function TodosLayout() {
 
   // 1) Filter
   let filteredTodos = todos;
+
   if (priority !== "any") {
     filteredTodos = filteredTodos.filter((todo) => todo.priority === priority);
   }
@@ -52,8 +54,6 @@ export default function TodosLayout() {
 
   console.log(filteredTodos);
 
-  //   2) Sort
-
   // 2) Sorting
   let sortedTodos = filteredTodos;
 
@@ -61,24 +61,9 @@ export default function TodosLayout() {
     const [field, direction] = sortBy.split("-") || [];
     const modifier = direction === "asc" ? 1 : -1;
 
-    sortedTodos = filteredTodos.slice().sort((a, b) => {
-      if (typeof a[field] === "string") {
-        // return a[field].localeCompare(b[field]) * modifier;
-        const first = a[field].toLowerCase();
-        const second = b[field].toLowerCase();
-
-        if (first < second) {
-          return -modifier;
-        } else if (first > second) {
-          return modifier;
-        } else {
-          return 0;
-        }
-      }
-
-      return (a[field] - b[field]) * modifier;
-    });
+    sortedTodos = sort(filteredTodos, field, modifier);
   }
+
   function handleChange(value) {
     setPriority(value);
   }
@@ -101,6 +86,7 @@ export default function TodosLayout() {
       </TodosActions>
 
       <TodosStatuses
+        todos={todos}
         statuses={statuses}
         currentStatus={status}
         onStatusChange={handleStatusChange}

@@ -3,12 +3,12 @@ import styles from "./TagList.module.css";
 import Tag from "./Tag";
 
 const colorPalettes = [
-  { backgroundColor: "bg-red-600", textColor: "text-stone-50" },
-  { backgroundColor: "bg-pink-600", textColor: "text-stone-50" },
-  { backgroundColor: "bg-blue-600", textColor: "text-stone-50" },
-  { backgroundColor: "bg-green-600", textColor: "text-stone-50" },
-  { backgroundColor: "bg-purple-600", textColor: "text-stone-50" },
-  { backgroundColor: "bg-orange-600", textColor: "text-stone-50" },
+  { backgroundColor: "--color-brand-600", textColor: "white" },
+  { backgroundColor: "--color-indigo-100", textColor: "white" },
+  { backgroundColor: "--color-green-100", textColor: "white" },
+  { backgroundColor: "--color-silver-100", textColor: "black" },
+  { backgroundColor: " --color-grey-900", textColor: "black" },
+  { backgroundColor: "--color-red-700", textColor: "black" },
 ];
 
 export default function TagsList({ tags }) {

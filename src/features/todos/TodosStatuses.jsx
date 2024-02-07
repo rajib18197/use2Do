@@ -2,6 +2,7 @@ import styles from "./TodosStatuses.module.css";
 import StatusBox from "./StatusBox";
 
 export default function TodosStatuses({
+  todos,
   statuses,
   currentStatus,
   onStatusChange,
@@ -11,6 +12,7 @@ export default function TodosStatuses({
       {statuses.map((status) => (
         <StatusBox
           key={status.value}
+          todos={todos}
           status={status}
           currentStatus={currentStatus}
           onStatusChange={onStatusChange}

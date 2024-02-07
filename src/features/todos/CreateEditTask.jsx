@@ -197,9 +197,9 @@ export default function CreateEditForm({
           <FormRow label={"Priority"} error={formState.priority.error}>
             <Select
               options={[
-                { value: "low", label: "Low" },
-                { value: "medium", label: "Medium" },
-                { value: "high", label: "High" },
+                { field: "low", label: "Low" },
+                { field: "medium", label: "Medium" },
+                { field: "high", label: "High" },
               ]}
               value={formState.priority.value}
               onSelect={handleChange}
