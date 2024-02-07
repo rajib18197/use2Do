@@ -1,0 +1,6 @@
+.tagList {
+  list-style: none;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}

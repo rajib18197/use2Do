@@ -1,7 +1,12 @@
 import "./App.css";
+import AppLayout from "./ui/AppLayout";
 
 function App() {
-  return <div>ToDo App</div>;
+  return (
+    <div>
+      <AppLayout />
+    </div>
+  );
 }
 
 export default App;

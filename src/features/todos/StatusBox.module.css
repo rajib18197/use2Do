@@ -1,0 +1,29 @@
+.statusBox {
+  border-radius: var(--border-radius-sm);
+  border-left: 4px solid orangered;
+
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  box-shadow: var(--shadow-xl);
+  padding: 2rem;
+  /* box-shadow: 0 0 0 transparent, 0 0 0 transparent,
+      0 0 3rem rgba(76, 103, 150, 0.3); */
+}
+
+.title {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+  color: var(--color-grey-600);
+}
+
+.stats {
+  font-size: 2.4rem;
+  line-height: 1;
+  font-weight: 500;
+  margin-left: auto;
+}

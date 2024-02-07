@@ -1,0 +1,42 @@
+.header {
+  background-color: var(--color-red-700);
+  height: 7rem;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerText {
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  gap: 3rem;
+  align-items: center;
+
+  &::after,
+  &::before {
+    content: "";
+    width: 75px;
+    height: 3px;
+    background-color: var(--color-brand-600);
+
+    @media (max-width: 60em) {
+      width: 50px;
+    }
+  }
+
+  @media (max-width: 60em) {
+    gap: 1rem;
+  }
+}
+
+.heading4 {
+  font-size: 4rem;
+  font-weight: 500;
+  font-family: "Josefin Sans", sans-serif;
+  /* color: #e11d48; */
+
+  @media (max-width: 60em) {
+    font-size: 3rem;
+  }
+}
