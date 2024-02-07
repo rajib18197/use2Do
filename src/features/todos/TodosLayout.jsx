@@ -10,6 +10,7 @@ import SortBy from "../../ui/SortBy";
 import TodosActions from "./TodosActions";
 
 import styles from "./TodosLayout.module.css";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const statuses = [
   { value: "all", label: "All Todos" },
@@ -32,7 +33,7 @@ const sortOptions = [
 ];
 
 export default function TodosLayout() {
-  const [todos, dispatch] = useReducer(todosReducer, TASKS_LIST);
+  const [todos, dispatch] = useLocalStorage(todosReducer, "todos");
   const [status, setStatus] = useState("all");
   const [priority, setPriority] = useState("any");
   const [sortBy, setSortBy] = useState("");
@@ -86,9 +87,8 @@ export default function TodosLayout() {
     setStatus(value);
   }
 
-  function handleSort(value) {
-    console.log(value);
-    setSortBy(value);
+  function handleSort(e) {
+    setSortBy(e.target.value);
   }
 
   return (
