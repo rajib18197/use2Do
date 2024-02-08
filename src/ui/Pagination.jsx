@@ -4,7 +4,6 @@ import styles from "./Pagination.module.css";
 import { PAGE_SIZE } from "../utils/constant";
 
 function Pagination({ count, page, onPageChange }) {
-  //   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = page;
 
   const pageCount = Math.ceil(count / PAGE_SIZE);
