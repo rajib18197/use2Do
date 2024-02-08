@@ -1,8 +1,17 @@
+import AlertMessage from "../../ui/AlertMessage";
 import Empty from "../../ui/Empty";
 import TodoItem from "./TodoItem";
 import styles from "./TodosList.module.css";
 
-export default function TodosList({ todos, dispatch }) {
+export default function TodosList({ todos, dispatch, status, priority }) {
+  if (status !== "all" && todos.length === 0) {
+    return <AlertMessage>No {status} task found!</AlertMessage>;
+  }
+
+  if (priority !== "any" && todos.length === 0) {
+    return <AlertMessage>No {priority} Priority task found!</AlertMessage>;
+  }
+
   if (todos.length === 0)
     return (
       <Empty onAddTask={dispatch}>

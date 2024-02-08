@@ -55,7 +55,7 @@ export default function TodosLayout() {
   if (status === "inComplete")
     filteredTodos = filteredTodos.filter((todo) => !todo.completed);
 
-  // console.log(filteredTodos);
+  console.log(status, priority, sort);
 
   // 2) Sorting
   let sortedTodos = filteredTodos;
@@ -75,15 +75,20 @@ export default function TodosLayout() {
     setStatus(value);
   }
 
-  function handleSort(e) {
-    setSortBy(e.target.value);
+  function handleSort(value) {
+    setSortBy(value);
   }
 
   return (
     <div className={styles.layout}>
       <TodosActions>
         <AddNewTask onAddTask={dispatch} />
-        <DeleteAllTodos onDeleteAllTodos={dispatch} />
+        <DeleteAllTodos
+          onDeleteAllTodos={dispatch}
+          onPriorityReset={handleChange}
+          onStatusReset={handleStatusChange}
+          onSortReset={handleSort}
+        />
         <MarkAllCompleted onAllCompleted={dispatch} />
         <DeleteAllCompleted onDeleteAllCompleted={dispatch} todos={todos} />
       </TodosActions>
@@ -108,7 +113,12 @@ export default function TodosLayout() {
         />
       </TodosOperations>
 
-      <TodosList todos={sortedTodos} dispatch={dispatch} />
+      <TodosList
+        todos={sortedTodos}
+        dispatch={dispatch}
+        status={status}
+        priority={priority}
+      />
     </div>
   );
 }
