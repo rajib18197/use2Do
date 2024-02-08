@@ -4,14 +4,11 @@ export function useLocalStorage(reducer, initialState, key) {
   const [todos, dispatch] = useReducer(reducer, [], () => {
     const storage = JSON.parse(localStorage.getItem(key));
     if (storage) {
-      console.log(storage);
       return storage;
     }
 
     return initialState;
   });
-
-  console.log(todos);
 
   useEffect(() => {
     console.log(todos);

@@ -1,21 +1,24 @@
-import { useReducer, useState } from "react";
+import styles from "./TodosLayout.module.css";
+import { useState } from "react";
+
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { todosReducer } from "./todosReducer";
+import { sort } from "../../utils/helpers";
+import { PAGE_SIZE } from "../../utils/constant";
+
 import TodosList from "./TodosList";
 import TodosOperations from "./TodosOperations";
 import TodosStatuses from "./TodosStatuses";
-import { todosReducer } from "./todosReducer";
-import { TASKS_LIST } from "../../utils/data";
 import AddNewTask from "./AddNewTask";
 import DeleteAllTodos from "./DeleteAllTodos";
 import Filters from "../../ui/Filters";
 import SortBy from "../../ui/SortBy";
 import TodosActions from "./TodosActions";
-
-import styles from "./TodosLayout.module.css";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { sort } from "../../utils/helpers";
 import MarkAllCompleted from "./MarkAllCompleted";
 import DeleteAllCompleted from "./DeleteAllCompleted";
-import { PAGE_SIZE } from "../../utils/constant";
+
+// for Dummy Data
+import { TASKS_LIST } from "../../utils/data";
 
 const statuses = [
   { value: "all", label: "All Todos" },
@@ -38,20 +41,19 @@ const sortOptions = [
 ];
 
 export default function TodosLayout() {
-  const [todos, dispatch] = useLocalStorage(todosReducer, TASKS_LIST, "todos");
+  const [todos, dispatch] = useLocalStorage(todosReducer, [], "todos");
   const [status, setStatus] = useState("all");
   const [priority, setPriority] = useState("any");
   const [sortBy, setSortBy] = useState("");
-
   const [page, setPage] = useState(1);
-  console.log(todos);
 
   let count = 0;
+
   if (priority === "any" && status === "all") {
     count = todos.length;
   }
 
-  // 1) Filter
+  // 1) Filter (by status & by priority)
   let filteredTodos = todos;
 
   if (priority !== "any") {
@@ -70,28 +72,27 @@ export default function TodosLayout() {
     count += filteredTodos.length;
   }
 
-  console.log(count);
-
   // 2) Pagination
-  console.log(page);
 
   if (page) {
     const start = (page - 1) * PAGE_SIZE;
     const end = page * PAGE_SIZE;
-    console.log(start, end);
+
     filteredTodos = filteredTodos.slice(start, end);
   }
 
-  // 2) Sorting
+  // 3) Sorting
   let sortedTodos = filteredTodos;
 
   if (sortBy) {
     const [field, direction] = sortBy.split("-") || [];
+    console.log(field);
     const modifier = direction === "asc" ? 1 : -1;
 
     sortedTodos = sort(filteredTodos, field, modifier);
   }
 
+  // handlers
   function handleChange(value) {
     setPriority(value);
     setPage(1);

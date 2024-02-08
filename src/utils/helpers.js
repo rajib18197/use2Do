@@ -32,9 +32,12 @@ export function cloneArrWitoutLast(arr) {
 // Sort an Object
 
 export const sort = function (arr, field, modifier) {
-  const newSortedArr = arr.slice().sort((a, b) => {
+  const newSortedArr = arr.slice();
+  newSortedArr.sort((a, b) => {
     if (typeof a[field] === "string") {
-      // return a[field].localeCompare(b[field]) * modifier;
+      // return (
+      //   a[field].toLowerCase().localeCompare(b[field].toLowerCase()) * modifier
+      // );
       const first = a[field].toLowerCase();
       const second = b[field].toLowerCase();
 
