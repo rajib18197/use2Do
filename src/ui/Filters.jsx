@@ -16,7 +16,7 @@ export default function Filters({
           key={option.label}
           onClick={() => onChangeFilter(option.value)}
         >
-          {option.color} {option.label}
+          {option.label}
         </button>
       ))}
     </div>

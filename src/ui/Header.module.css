@@ -21,14 +21,24 @@
     width: 75px;
     height: 3px;
     background-color: var(--color-brand-600);
+  }
 
-    @media (max-width: 60em) {
+  @media (max-width: 60em) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 60em) {
+    &::after,
+    &::before {
       width: 50px;
     }
   }
 
   @media (max-width: 60em) {
-    gap: 1rem;
+    &::after,
+    &::before {
+      width: 20px;
+    }
   }
 }
 
@@ -39,6 +49,10 @@
   /* color: #e11d48; */
 
   @media (max-width: 60em) {
-    font-size: 3rem;
+    font-size: 2.2rem;
   }
+
+  /* @media (max-width: 39em) {
+    grid-template-columns: 1fr;
+  } */
 }

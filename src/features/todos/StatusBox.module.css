@@ -25,6 +25,10 @@
   text-transform: uppercase;
   letter-spacing: 0.4px;
   font-weight: 600;
+
+  @media (max-width: 51em) {
+    font-size: 1.4rem;
+  }
 }
 
 .count {
@@ -32,4 +36,7 @@
   line-height: 1;
   font-weight: 500;
   margin-left: auto;
+  @media (max-width: 51em) {
+    font-size: 1.6rem;
+  }
 }

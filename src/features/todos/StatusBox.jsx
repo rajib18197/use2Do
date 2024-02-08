@@ -23,7 +23,14 @@ export default function StatusBox({
       onClick={() => onStatusChange(status.value)}
     >
       <span className={styles.label}>{status.label}</span>
-      <span className={styles.count}>Total {count} Tasks</span>
+      <span className={styles.count}>
+        {status.value === "all" &&
+          `Total ${count} ${count === 1 ? "Task" : "Tasks"}`}
+        {status.value === "completed" &&
+          `${count} ${count === 1 ? "Task" : "Tasks"} completed`}
+        {status.value === "inComplete" &&
+          `${count} ${count === 1 ? "Task" : "Tasks"} remaining`}
+      </span>
     </button>
   );
 }
