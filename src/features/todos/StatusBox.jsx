@@ -22,7 +22,7 @@ export default function StatusBox({
       }`}
       onClick={() => onStatusChange(status.value)}
     >
-      <span className={styles.label}>{status.label}</span>
+      <strong className={styles.label}>{status.label}</strong>
       <span className={styles.count}>
         {status.value === "all" &&
           `Total ${count} ${count === 1 ? "Task" : "Tasks"}`}

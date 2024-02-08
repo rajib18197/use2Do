@@ -1,0 +1,22 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.text {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+
+  svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    fill: var(--color-brand-600);
+  }
+
+  p {
+    font-size: 1.8rem;
+  }
+}

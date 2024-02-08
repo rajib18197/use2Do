@@ -120,3 +120,11 @@ html {
 body {
   font-family: sans-serif;
 }
+
+button {
+  cursor: pointer;
+}
+
+*:disabled {
+  cursor: not-allowed;
+}

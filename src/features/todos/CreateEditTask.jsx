@@ -1,4 +1,3 @@
-// import { toast } from "react-toastify";
 import {
   hasErrorMessage,
   isFieldEmpty,
@@ -6,7 +5,6 @@ import {
 } from "../../utils/helpers";
 
 import { useReducer } from "react";
-// import { useTasksDispatch } from "../../contexts/TasksContext";
 import styles from "./CreateEditTask.module.css";
 
 import { formReducer } from "./formReducer";
@@ -23,8 +21,6 @@ export default function CreateEditForm({
   onCloseModal,
 }) {
   const isEditSession = Boolean(todoToEdit?.id);
-
-  //   const tasksDispatch = useTasksDispatch();
 
   const [formState, dispatch] = useReducer(formReducer, {
     title: {
@@ -142,10 +138,8 @@ export default function CreateEditForm({
 
     if (isEditSession) {
       onEditTodo({ type: "EDIT_TASK", payload: task });
-      //   toast.success(`Task successfully edited!`);
     } else {
       onAddTask({ type: "ADD_NEW_TASK", payload: task });
-      //   toast.success("New Task successfully created");
     }
 
     // 5) Finally, Close the modal window after the task has successfully created or edited
@@ -154,10 +148,6 @@ export default function CreateEditForm({
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      {/* <h2 className="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]">
-        {isEditSession ? "Update Task" : "Add New Task"}
-      </h2> */}
-
       <div>
         <FormRow label={"Title"} error={formState.title.error}>
           <Input

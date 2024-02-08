@@ -20,7 +20,7 @@
   font-weight: 500;
 }
 
-span {
+.error {
   font-size: 1.4rem;
   color: var(--color-red-700);
 }
