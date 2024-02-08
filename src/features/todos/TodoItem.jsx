@@ -1,3 +1,4 @@
+import Button from "../../ui/Button";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Modal from "../../ui/Modal";
 import CreateEditForm from "./CreateEditTask";
@@ -6,10 +7,23 @@ import styles from "./TodoItem.module.css";
 import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
 
 export default function TodoItem({ todo, dispatch }) {
-  const { id: todoId, title, description, tags, priority, completed } = todo;
+  const {
+    id: todoId,
+    title,
+    description,
+    tags,
+    priority: { name: priorityName, color: priorityColor },
+    completed,
+  } = todo;
+  console.log(todo.priority, priorityColor, priorityName);
+  const priorityToColor = {
+    low: "blue",
+    high: "green",
+    medium: "silver",
+  };
 
   return (
-    <div className={styles.todo}>
+    <div className={`${styles.todo} ${completed ? `${styles.completed}` : ""}`}>
       <div className={styles.todoCompleted}>
         <button
           className={styles.button}
@@ -23,19 +37,21 @@ export default function TodoItem({ todo, dispatch }) {
 
       <h2>{title}</h2>
 
-      <div>{description}</div>
+      <p className={styles.description}>{description}</p>
 
       <TagsList tags={tags} />
 
-      <p>
-        <span>color: </span>
-        {priority}
+      <p className={styles.priority}>
+        {/* <span className={styles[priorityToColor[priorityColor]]}>color: </span> */}
+        <span className={styles[priorityToColor[priorityName]]}>
+          {priorityName}
+        </span>
       </p>
 
-      <div>
+      <div className={styles.actions}>
         <Modal>
           <Modal.Open opens={"edit-task"}>
-            <button>Edit</button>
+            <Button variation={"secondary"}>Edit</Button>
           </Modal.Open>
 
           <Modal.Window opens={"edit-task"}>
@@ -45,7 +61,7 @@ export default function TodoItem({ todo, dispatch }) {
 
         <Modal>
           <Modal.Open opens={"delete-task"}>
-            <button>delete</button>
+            <Button variation={"danger"}>delete</Button>
           </Modal.Open>
           <Modal.Window opens={"delete-task"}>
             <ConfirmDelete

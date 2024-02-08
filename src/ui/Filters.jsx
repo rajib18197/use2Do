@@ -9,14 +9,15 @@ export default function Filters({
   return (
     <div className={styles.filters}>
       {options.map((option) => (
-        <Button
-          size={"small"}
+        <button
+          className={`${styles.button} ${
+            currentFilterValue === option.value ? styles["active"] : ""
+          }`}
           key={option.label}
-          active={currentFilterValue === option.value}
           onClick={() => onChangeFilter(option.value)}
         >
           {option.color} {option.label}
-        </Button>
+        </button>
       ))}
     </div>
   );

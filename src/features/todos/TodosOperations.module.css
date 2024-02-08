@@ -1,12 +1,9 @@
 .operations {
   border-radius: var(--border-radius-sm);
-  border-left: 4px solid orangered;
 
-  padding: 1rem;
-  gap: 2rem;
+  padding: 0.8rem;
 
-  box-shadow: var(--shadow-xl);
-  padding: 2rem;
+  box-shadow: var(--shadow-md);
 
   display: flex;
   gap: 1rem;

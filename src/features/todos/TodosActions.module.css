@@ -3,5 +3,8 @@
   gap: 1rem;
   justify-content: end;
   align-items: center;
-  background-color: rgb(219, 216, 216);
+  padding: 0.8rem;
+
+  background-color: var(--color-grey-50);
+  box-shadow: var(--shadow-md);
 }

@@ -16,12 +16,14 @@ export default function StatusBox({
   }
 
   return (
-    <div
-      className={styles.statusBox}
+    <button
+      className={`${styles.statusBox} ${
+        status.value === currentStatus ? `${styles.active}` : ""
+      }`}
       onClick={() => onStatusChange(status.value)}
     >
-      <h5 className={styles.title}>{status.label}</h5>
-      <p>Total {count} Tasks</p>
-    </div>
+      <span className={styles.label}>{status.label}</span>
+      <span className={styles.count}>Total {count} Tasks</span>
+    </button>
   );
 }
