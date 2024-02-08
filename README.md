@@ -27,4 +27,4 @@
 - striving for reusable component whenever need arises
 - Fully Responsive Design
 
-Project Link: https://deliver-delicious.vercel.app/
+Project Link: https://use2-do.vercel.app/
