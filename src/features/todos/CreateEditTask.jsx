@@ -14,6 +14,7 @@ import { formReducer } from "./formReducer";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import Select from "../../ui/Select";
+import Button from "../../ui/Button";
 
 export default function CreateEditForm({
   onAddTask,
@@ -171,7 +172,7 @@ export default function CreateEditForm({
 
         <FormRow label={"Description"} error={formState.description.error}>
           <textarea
-            className="block min-h-[120px] w-full rounded-md bg-[#2D323F] px-3 py-2.5 lg:min-h-[180px]"
+            className={styles.textarea}
             type="text"
             name="description"
             value={formState.description.value}
@@ -210,21 +211,22 @@ export default function CreateEditForm({
         </div>
       </div>
 
-      <div className="mt-16 flex gap-2 justify-center lg:mt-20">
-        <button
+      <div className={styles.actions}>
+        <Button
           type="submit"
+          variation="secondary"
           className="rounded bg-stone-100 px-4 py-2 text-stone-800 transition-all hover:opacity-80"
           onClick={() => onCloseModal?.()}
         >
           Cancel
-        </button>
+        </Button>
 
-        <button
+        <Button
           type="submit"
           className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
         >
           {isEditSession ? "Save Task" : "Create new Task"}
-        </button>
+        </Button>
       </div>
     </form>
   );

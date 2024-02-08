@@ -6,7 +6,29 @@
   border-radius: var(--border-radius-md);
   width: 80rem;
   overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  @media (max-width: 44em) {
+    width: 50rem;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 30em) {
+    width: 33rem;
+  }
 }
 
-.formRowGroups {
+.actions {
+  display: flex;
+  gap: 1rem;
+  align-self: end;
+}
+
+.textarea {
+  height: 5rem;
+  overflow-y: auto;
+  border: 2px solid var(--color-grey-600);
 }

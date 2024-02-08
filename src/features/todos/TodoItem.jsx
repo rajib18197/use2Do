@@ -7,20 +7,15 @@ import styles from "./TodoItem.module.css";
 import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
 
 export default function TodoItem({ todo, dispatch }) {
-  const {
-    id: todoId,
-    title,
-    description,
-    tags,
-    priority: { name: priorityName, color: priorityColor },
-    completed,
-  } = todo;
-  console.log(todo.priority, priorityColor, priorityName);
+  const { id: todoId, title, description, tags, priority, completed } = todo;
+
   const priorityToColor = {
     low: "blue",
     high: "green",
     medium: "silver",
   };
+
+  console.log(priority);
 
   return (
     <div className={`${styles.todo} ${completed ? `${styles.completed}` : ""}`}>
@@ -43,15 +38,15 @@ export default function TodoItem({ todo, dispatch }) {
 
       <p className={styles.priority}>
         {/* <span className={styles[priorityToColor[priorityColor]]}>color: </span> */}
-        <span className={styles[priorityToColor[priorityName]]}>
-          {priorityName}
-        </span>
+        <span className={styles[priorityToColor[priority]]}>{priority}</span>
       </p>
 
       <div className={styles.actions}>
         <Modal>
           <Modal.Open opens={"edit-task"}>
-            <Button variation={"secondary"}>Edit</Button>
+            <Button variation={"secondary"} disabled={completed}>
+              Edit
+            </Button>
           </Modal.Open>
 
           <Modal.Window opens={"edit-task"}>
@@ -61,7 +56,9 @@ export default function TodoItem({ todo, dispatch }) {
 
         <Modal>
           <Modal.Open opens={"delete-task"}>
-            <Button variation={"danger"}>delete</Button>
+            <Button variation={"danger"} disabled={completed}>
+              delete
+            </Button>
           </Modal.Open>
           <Modal.Window opens={"delete-task"}>
             <ConfirmDelete
