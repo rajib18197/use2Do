@@ -37,35 +37,37 @@ export default function TodoItem({ todo, dispatch }) {
       <TagsList tags={tags} />
 
       <p className={styles.priority}>
-        {/* <span className={styles[priorityToColor[priorityColor]]}>color: </span> */}
         <span className={styles[priorityToColor[priority]]}>{priority}</span>
       </p>
 
       <div className={styles.actions}>
         <Modal>
-          <Modal.Open opens={"edit-task"}>
+          <Modal.Open opens={"edit-todo"}>
             <Button variation={"secondary"} disabled={completed}>
               Edit
             </Button>
           </Modal.Open>
 
-          <Modal.Window opens={"edit-task"}>
+          <Modal.Window opens={"edit-todo"}>
             <CreateEditForm todoToEdit={todo} onEditTodo={dispatch} />
           </Modal.Window>
         </Modal>
 
         <Modal>
-          <Modal.Open opens={"delete-task"}>
+          <Modal.Open opens={"delete-todo"}>
             <Button variation={"danger"} disabled={completed}>
               delete
             </Button>
           </Modal.Open>
-          <Modal.Window opens={"delete-task"}>
+          <Modal.Window opens={"delete-todo"}>
             <ConfirmDelete
               onDelete={() =>
-                dispatch({ type: "DELETE_TASK", payload: todo.id })
+                dispatch({ type: "DELETE_TODO", payload: todo.id })
               }
-            />
+            >
+              Are you sure you want to delete this todo permanently? This action
+              cannot be undone.
+            </ConfirmDelete>
           </Modal.Window>
         </Modal>
       </div>

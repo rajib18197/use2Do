@@ -11,8 +11,11 @@ export default function DeleteAllTodos({ onDeleteAllTodos }) {
         </Modal.Open>
         <Modal.Window>
           <ConfirmDelete
-            onDelete={() => onDeleteAllTodos({ type: "DELETE_ALL_TASKS" })}
-          />
+            onDelete={() => onDeleteAllTodos({ type: "DELETE_ALL_TODOS" })}
+          >
+            Are you sure you want to delete all todos permanently? This action
+            cannot be undone.
+          </ConfirmDelete>
         </Modal.Window>
       </Modal>
     </div>

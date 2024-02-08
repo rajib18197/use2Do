@@ -3,7 +3,7 @@ import styles from "./Empty.module.css";
 import AddNewTask from "../features/todos/AddNewTask";
 import { FaRegFaceSmile } from "react-icons/fa6";
 
-export default function Empty({ children }) {
+export default function Empty({ onAddTask, children }) {
   return (
     <div className={styles.empty}>
       <div className={styles.text}>
@@ -11,7 +11,7 @@ export default function Empty({ children }) {
         <p>{children}</p>
       </div>
       <div>
-        <AddNewTask />
+        <AddNewTask onAddTask={onAddTask} />
       </div>
     </div>
   );

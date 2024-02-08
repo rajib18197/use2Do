@@ -12,6 +12,8 @@ import TodosActions from "./TodosActions";
 import styles from "./TodosLayout.module.css";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { sort } from "../../utils/helpers";
+import MarkAllCompleted from "./MarkAllCompleted";
+import DeleteAllCompleted from "./DeleteAllCompleted";
 
 const statuses = [
   { value: "all", label: "All Todos" },
@@ -34,10 +36,11 @@ const sortOptions = [
 ];
 
 export default function TodosLayout() {
-  const [todos, dispatch] = useLocalStorage(todosReducer, "todos");
+  const [todos, dispatch] = useLocalStorage(todosReducer, [], "todos");
   const [status, setStatus] = useState("all");
   const [priority, setPriority] = useState("any");
   const [sortBy, setSortBy] = useState("");
+  console.log(todos);
 
   // 1) Filter
   let filteredTodos = todos;
@@ -52,7 +55,7 @@ export default function TodosLayout() {
   if (status === "inComplete")
     filteredTodos = filteredTodos.filter((todo) => !todo.completed);
 
-  console.log(filteredTodos);
+  // console.log(filteredTodos);
 
   // 2) Sorting
   let sortedTodos = filteredTodos;
@@ -81,8 +84,8 @@ export default function TodosLayout() {
       <TodosActions>
         <AddNewTask onAddTask={dispatch} />
         <DeleteAllTodos onDeleteAllTodos={dispatch} />
-        {/* <button>Mark All Completed</button>
-        <button>Delete Completed</button> */}
+        <MarkAllCompleted onAllCompleted={dispatch} />
+        <DeleteAllCompleted onDeleteAllCompleted={dispatch} todos={todos} />
       </TodosActions>
 
       <TodosStatuses

@@ -5,7 +5,9 @@ import styles from "./TodosList.module.css";
 export default function TodosList({ todos, dispatch }) {
   if (todos.length === 0)
     return (
-      <Empty>Task list is empty! What do you need to get done today?</Empty>
+      <Empty onAddTask={dispatch}>
+        Task list is empty! What do you need to get done today?
+      </Empty>
     );
 
   return (

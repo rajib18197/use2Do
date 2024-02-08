@@ -21,6 +21,7 @@ export default function CreateEditForm({
   onCloseModal,
 }) {
   const isEditSession = Boolean(todoToEdit?.id);
+  console.log(onAddTask);
 
   const [formState, dispatch] = useReducer(formReducer, {
     title: {
@@ -137,9 +138,9 @@ export default function CreateEditForm({
     };
 
     if (isEditSession) {
-      onEditTodo({ type: "EDIT_TASK", payload: task });
+      onEditTodo({ type: "EDIT_TODO", payload: task });
     } else {
-      onAddTask({ type: "ADD_NEW_TASK", payload: task });
+      onAddTask({ type: "ADD_NEW_TODO", payload: task });
     }
 
     // 5) Finally, Close the modal window after the task has successfully created or edited

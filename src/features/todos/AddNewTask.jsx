@@ -9,7 +9,7 @@ export default function AddNewTask({ onAddTask }) {
         <Modal.Open opens="addTask">
           <Button>Add New Task</Button>
         </Modal.Open>
-        <Modal.Window opens={"addTask"}>
+        <Modal.Window opens="addTask">
           <CreateEditForm onAddTask={onAddTask} />
         </Modal.Window>
       </Modal>
