@@ -6,13 +6,13 @@ export default function StatusBox({
   currentStatus,
   onStatusChange,
 }) {
-  let count = todos.length;
+  let count = todos?.length;
   if (status.value === "completed") {
-    count = todos.filter((todo) => todo.completed).length;
+    count = todos?.filter((todo) => todo.completed).length;
   }
 
   if (status.value === "inComplete") {
-    count = todos.filter((todo) => !todo.completed).length;
+    count = todos?.filter((todo) => !todo.completed).length;
   }
 
   return (

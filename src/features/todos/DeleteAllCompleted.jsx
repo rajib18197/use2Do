@@ -5,7 +5,7 @@ export default function DeleteAllCompleted({ onDeleteAllCompleted, todos }) {
     onDeleteAllCompleted({ type: "DELETE_ALL_COMPLETED" });
   }
 
-  const hasCompletedTodos = todos.some((todo) => todo.completed);
+  const hasCompletedTodos = todos?.some((todo) => todo.completed);
 
   return (
     <Button

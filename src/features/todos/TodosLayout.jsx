@@ -2,7 +2,8 @@ import { useReducer, useState } from "react";
 import TodosList from "./TodosList";
 import TodosOperations from "./TodosOperations";
 import TodosStatuses from "./TodosStatuses";
-import { TASKS_LIST, todosReducer } from "./todosReducer";
+import { todosReducer } from "./todosReducer";
+import { TASKS_LIST } from "../../utils/data";
 import AddNewTask from "./AddNewTask";
 import DeleteAllTodos from "./DeleteAllTodos";
 import Filters from "../../ui/Filters";
@@ -14,6 +15,7 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { sort } from "../../utils/helpers";
 import MarkAllCompleted from "./MarkAllCompleted";
 import DeleteAllCompleted from "./DeleteAllCompleted";
+import { PAGE_SIZE } from "../../utils/constant";
 
 const statuses = [
   { value: "all", label: "All Todos" },
@@ -36,26 +38,49 @@ const sortOptions = [
 ];
 
 export default function TodosLayout() {
-  const [todos, dispatch] = useLocalStorage(todosReducer, [], "todos");
+  const [todos, dispatch] = useLocalStorage(todosReducer, TASKS_LIST, "todos");
   const [status, setStatus] = useState("all");
   const [priority, setPriority] = useState("any");
   const [sortBy, setSortBy] = useState("");
+
+  const [page, setPage] = useState(1);
   console.log(todos);
+
+  let count = 0;
+  if (priority === "any" && status === "all") {
+    count = todos.length;
+  }
 
   // 1) Filter
   let filteredTodos = todos;
 
   if (priority !== "any") {
     filteredTodos = filteredTodos.filter((todo) => todo.priority === priority);
+    count += filteredTodos.length;
   }
 
   if (status === "all") filteredTodos = filteredTodos;
-  if (status === "completed")
+  if (status === "completed") {
     filteredTodos = filteredTodos.filter((todo) => todo.completed);
-  if (status === "inComplete")
-    filteredTodos = filteredTodos.filter((todo) => !todo.completed);
+    count += filteredTodos.length;
+  }
 
-  console.log(status, priority, sort);
+  if (status === "inComplete") {
+    filteredTodos = filteredTodos.filter((todo) => !todo.completed);
+    count += filteredTodos.length;
+  }
+
+  console.log(count);
+
+  // 2) Pagination
+  console.log(page);
+
+  if (page) {
+    const start = (page - 1) * PAGE_SIZE;
+    const end = page * PAGE_SIZE;
+    console.log(start, end);
+    filteredTodos = filteredTodos.slice(start, end);
+  }
 
   // 2) Sorting
   let sortedTodos = filteredTodos;
@@ -69,6 +94,7 @@ export default function TodosLayout() {
 
   function handleChange(value) {
     setPriority(value);
+    setPage(1);
   }
 
   function handleStatusChange(value) {
@@ -77,6 +103,10 @@ export default function TodosLayout() {
 
   function handleSort(value) {
     setSortBy(value);
+  }
+
+  function handlePage(page) {
+    setPage(page);
   }
 
   return (
@@ -118,6 +148,9 @@ export default function TodosLayout() {
         dispatch={dispatch}
         status={status}
         priority={priority}
+        page={page}
+        onPageChange={handlePage}
+        count={count}
       />
     </div>
   );

@@ -10,9 +10,11 @@
 
 - users should be able to do all the CRUD operation (Create, Read, Update, Delete) for TasksList
 - Can toggle a task whether it is done or not
-- App has Client Side Data Operations: filters, sorting so that users are able to refine the table with ease
+- App has Client Side Data Operations: filters, sorting and paginations so that users are able to refine the tasks list with ease
 - Custom form Validation to make the user experience much better
 - Can Delete all tasks at once
+- Can Delete all Completed tasks at once
+- Can Mark all the tasks Completed at once
 - leverage a design pattern: Compound Component for reusable and flexible component
 - Used Composition pattern for building better layouts
 - For Styling I used CSS Modules to make the UI looks clean and responsive.

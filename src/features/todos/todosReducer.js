@@ -90,7 +90,70 @@ export const TASKS_LIST = [
 
   {
     id: crypto.randomUUID(),
+    title: "Rolls Royce",
+    description:
+      "Integrate a web API with a third-party database using secure methods, focusing on seamless data exchange and data integrity.",
+    tags: ["DSA", "JS", "security"],
+    priority: "high",
+    completed: true,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Iphone",
+    description:
+      "Integrate a web API with a third-party database using secure methods, focusing on seamless data exchange and data integrity.",
+    tags: ["DSA", "JS", "security"],
+    priority: "high",
+    completed: true,
+  },
+  {
+    id: crypto.randomUUID(),
     title: "Data Handling",
+    description:
+      "Integrate a web API with a third-party database using secure methods, focusing on seamless data exchange and data integrity.",
+    tags: ["DSA", "JS", "security"],
+    priority: "high",
+    completed: true,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Cars",
+    description:
+      "Integrate a web API with a third-party database using secure methods, focusing on seamless data exchange and data integrity.",
+    tags: ["DSA", "JS", "security"],
+    priority: "high",
+    completed: true,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Memoization",
+    description:
+      "Integrate a web API with a third-party database using secure methods, focusing on seamless data exchange and data integrity.",
+    tags: ["DSA", "JS", "security"],
+    priority: "high",
+    completed: true,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "API",
+    description:
+      "Integrate a web API with a third-party database using secure methods, focusing on seamless data exchange and data integrity.",
+    tags: ["DSA", "JS", "security"],
+    priority: "high",
+    completed: true,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "React",
+    description:
+      "Integrate a web API with a third-party database using secure methods, focusing on seamless data exchange and data integrity.",
+    tags: ["DSA", "JS", "security"],
+    priority: "high",
+    completed: true,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "JavaScript",
     description:
       "Integrate a web API with a third-party database using secure methods, focusing on seamless data exchange and data integrity.",
     tags: ["DSA", "JS", "security"],
